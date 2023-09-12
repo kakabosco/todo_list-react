@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
 
 export const Container = styled.div`
   display: grid;
-  grid-template-columns: 224px auto;
+  grid-template-columns: 240px auto;
 `
 
 export default GlobalStyle
