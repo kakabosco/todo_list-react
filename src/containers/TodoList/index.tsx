@@ -1,24 +1,26 @@
 import Task from '../../components/Task'
 import { Container } from './styles'
 
+import * as enums from '../../utils/enums/Task'
+
 const tasks = [
   {
     title: 'Tarefa 1',
-    priority: 'Importante',
+    priority: enums.Priority.IMPORTANT,
     description: 'Descrição da tarefa 1',
-    status: 'Pendente'
+    status: enums.Status.PENDING
   },
   {
     title: 'Tarefa 2',
-    priority: 'Urgente',
+    priority: enums.Priority.URGENT,
     description: 'Descrição da tarefa 2',
-    status: 'Concluída'
+    status: enums.Status.DONE
   },
   {
     title: 'Tarefa 3',
-    priority: 'Importante',
+    priority: enums.Priority.IMPORTANT,
     description: 'Descrição da tarefa 3',
-    status: 'Pendente'
+    status: enums.Status.PENDING
   }
 ]
 
