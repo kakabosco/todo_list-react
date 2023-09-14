@@ -27,12 +27,18 @@ export const Card = styled.div`
   background-color: #fcfcfc;
   border-radius: 16px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
 `
 
 export const Title = styled.h3`
-  margin-bottom: 16px;
   font-size: 18px;
   font-weight: bold;
+  margin-left: 8px;
 `
 
 export const Tag = styled.span<TagProps>`
