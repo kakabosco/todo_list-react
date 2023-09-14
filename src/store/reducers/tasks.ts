@@ -41,10 +41,16 @@ const tasksSlice = createSlice({
       state.itens = [
         ...state.itens.filter((task) => task.id !== action.payload)
       ]
+    },
+    editTask: (state, action: PayloadAction<Task>) => {
+      const indexTask = state.itens.findIndex((t) => t.id === action.payload.id)
+      if (indexTask >= 0) {
+        state.itens[indexTask] = action.payload
+      }
     }
   }
 })
 
-export const { removeTask } = tasksSlice.actions
+export const { removeTask, editTask } = tasksSlice.actions
 
 export default tasksSlice.reducer

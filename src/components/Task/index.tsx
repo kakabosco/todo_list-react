@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 
 import * as S from './styles'
-import { removeTask } from '../../store/reducers/tasks'
+import { removeTask, editTask } from '../../store/reducers/tasks'
 import TaskClass from '../../models/Task'
 
 type Props = TaskClass
@@ -10,6 +10,18 @@ type Props = TaskClass
 const Task = ({ title, priority, status, description, id }: Props) => {
   const dispatch = useDispatch()
   const [isEditing, setIsEditing] = useState(false)
+  const [descriptionValue, setDescriptionValue] = useState('')
+
+  useEffect(() => {
+    if (description.length > 0) {
+      setDescriptionValue(description)
+    }
+  }, [description])
+
+  function cancelEdit() {
+    setIsEditing(false)
+    setDescriptionValue(description)
+  }
 
   return (
     <S.Card>
@@ -20,12 +32,35 @@ const Task = ({ title, priority, status, description, id }: Props) => {
       <S.Tag parameter="status" status={status}>
         {status}
       </S.Tag>
-      <S.Description value={description} />
+      <S.Description
+        disabled={!isEditing}
+        value={descriptionValue}
+        onChange={(e) => setDescriptionValue(e.target.value)}
+      />
       <S.ActionBar>
         {isEditing ? (
           <>
-            <S.SaveButton>Salvar</S.SaveButton>
-            <S.CancelRemoveButton onClick={() => setIsEditing(false)}>
+            <S.SaveButton
+              onClick={() => {
+                dispatch(
+                  editTask({
+                    title,
+                    priority,
+                    status,
+                    description,
+                    id
+                  })
+                )
+                setIsEditing(false)
+              }}
+            >
+              Salvar
+            </S.SaveButton>
+            <S.CancelRemoveButton
+              onClick={() => {
+                cancelEdit()
+              }}
+            >
               Cancelar
             </S.CancelRemoveButton>
           </>
