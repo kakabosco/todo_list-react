@@ -7,7 +7,6 @@ import { Field } from '../../styles'
 import { SForm, Options } from './styles'
 import * as enums from '../../utils/enums/Task'
 import { registerTask } from '../../store/reducers/tasks'
-import Task from '../../models/Task'
 
 const Form = () => {
   const dispatch = useDispatch()
@@ -19,15 +18,15 @@ const Form = () => {
 
   const registerNewTask = (e: FormEvent) => {
     e.preventDefault()
-    const addTask = new Task(
-      title,
-      priority,
-      enums.Status.PENDING,
-      description,
-      9
-    )
 
-    dispatch(registerTask(addTask))
+    dispatch(
+      registerTask({
+        title,
+        priority,
+        status: enums.Status.PENDING,
+        description
+      })
+    )
     navigate('/')
   }
 
