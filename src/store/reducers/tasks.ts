@@ -47,10 +47,21 @@ const tasksSlice = createSlice({
       if (indexTask >= 0) {
         state.itens[indexTask] = action.payload
       }
+    },
+    registerTask: (state, action: PayloadAction<Task>) => {
+      const taskExists = state.itens.find(
+        (t) => t.title.toLowerCase() === action.payload.title.toLowerCase()
+      )
+
+      if (taskExists) {
+        alert('Tarefa já cadastrada')
+      } else {
+        state.itens.push(action.payload)
+      }
     }
   }
 })
 
-export const { removeTask, editTask } = tasksSlice.actions
+export const { removeTask, editTask, registerTask } = tasksSlice.actions
 
 export default tasksSlice.reducer
